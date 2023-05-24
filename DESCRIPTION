@@ -1,14 +1,18 @@
 Package: reliability
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Support Functions For Reliability/ALT Analysis
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Dennis L Malandro
+Maintainer: Dennis L Malandro <dennismalandro@gmail.com>
+Description: Probability transforms and model fitting and
+    extraction functions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    scales
+    dplyr,
+    purrr,
+    scales,
+    survival,
+    tibble
 RoxygenNote: 7.2.3
