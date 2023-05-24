@@ -1,6 +1,6 @@
 #' Probability-model linearizing transformations
 #'
-#' @return
+#' @return A scale transformer
 #' @export
 #'
 #' @examples
