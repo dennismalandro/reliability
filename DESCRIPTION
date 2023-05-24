@@ -16,3 +16,5 @@ Imports:
     survival,
     tibble
 RoxygenNote: 7.2.3
+URL: https://github.com/dennismalandro/reliability
+BugReports: https://github.com/dennismalandro/reliability/issues
