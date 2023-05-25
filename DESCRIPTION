@@ -10,9 +10,11 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    base,
     dplyr,
     purrr,
     scales,
+    stats,
     survival,
     tibble
 RoxygenNote: 7.2.3

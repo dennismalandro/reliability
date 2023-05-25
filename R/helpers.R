@@ -111,3 +111,40 @@ add_km <- function(data) {
 fit_surv <- function(data) survival::survreg(
   survival::Surv(time, fail) ~ 1,
   data = data)
+
+#' Get stub from capacitance at two frequencies
+#'
+#' @param data tibble with cap (uF) and frq (kHz)
+#'
+#' @return numeric(1) capacitance difference
+#' @export
+#'
+#' @details Stubs are associated with end-spray separation from film end, and hence tend to start after a time "threshold"
+#'
+#' Not a stub if max(frq) < 3 kHz, so return 0
+get_stub <- function(data) {
+  data |>
+    dplyr::filter(frq < 300) |>
+    dplyr::filter(frq == 0.95 | cap == min(cap)) |>
+    dplyr::summarize(
+      stub = -base::diff(cap),
+      max_frq = base::max(frq)) |>
+    dplyr::mutate(
+      stub = dplyr::if_else(max_frq < 3, 0, stub)) |>
+    purrr::pluck('stub', 1)}
+
+#' Get failure time by log-linear interpolation
+#'
+#' @param data tibble with value and hrs columns
+#' @param y quasiquoted response (ie, degradation metric)
+#' @param time quasiquoted Time under stress
+#' @param fail_crit Failure criterion (eg, cap change)
+#'
+#' @return numeric interpolated failure time
+#' @export
+get_fail_time <- function(data, y, time, fail_crit) {
+  y <- data |> dplyr::pull({{ y }})
+  time <- data |> dplyr::pull({{ time }})
+  fun <- stats::approxfun(y, base::log(time))
+  base::exp(fun(fail_crit))}
+
